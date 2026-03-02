@@ -49,6 +49,9 @@ def classify_patch(green, brightness):
 
 # --------- Generate Vulnerability Map ----------
 def generate_map(image):
+    low = 0
+    medium = 0
+    high = 0
     image = resize_image(image)
     patches = create_patches(image)
 
@@ -59,15 +62,23 @@ def generate_map(image):
         risk = classify_patch(green, brightness)
 
         if risk == 2:
-            color = [0, 0, 255]  # Red = High
+            color = [0, 0, 255]# Red = High
+            high +=1
         elif risk == 1:
             color = [0, 165, 255]  # Orange = Medium
+            medium+=1
         else:
             color = [0, 255, 0]  # Green = Low
+            low+=1
 
         result_map[i:i+32, j:j+32] = color
-
-    return result_map
+        total = low + medium + high
+        stats = {
+            "low": round((low/total)*100, 2),
+            "medium": round((medium/total)*100, 2),
+            "high": round((high/total)*100, 2)
+        }
+    return result_map,stats
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -78,14 +89,15 @@ def index():
         file.save(path)
 
         image = cv2.imread(path)
-        result = generate_map(image)
+        result,stats = generate_map(image)
 
         result_path = os.path.join(RESULT_FOLDER, "output.png")
         cv2.imwrite(result_path, result)
 
         return render_template("index.html",
                                uploaded_image=path,
-                               result_image=result_path)
+                               result_image=result_path,
+                               stats=stats)
 
     return render_template("index.html")
 

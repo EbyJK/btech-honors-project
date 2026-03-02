@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.dashboard {
+    max-width: 1300px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    
+    font-size: 36px;
+    font-weight:600;
+}
+
+.header p {
+    color: #94a3b8;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+input[type="file"] {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* Main Panel */
+.main-panel {
+    flex: 1;
+}
+
+.image-row {
+    display: flex;
+    gap: 20px;
+}
+
+.image-card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 12px;
+    flex: 1;
+}
+
+.image-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.stats-card {
+    margin-top: 20px;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.low-bg { background: #166534; }
+.medium-bg { background: #b45309; }
+.high-bg { background: #991b1b; }
+
+.legend span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.low { background: #22c55e; }
+.medium { background: #f59e0b; }
+.high { background: #ef4444; }
+
+.placeholder {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 60px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+.placeholder h2 {
+    margin: 0;
+    font-weight: 500;
+}
+.image-card,
+.sidebar,
+.stats-card,
+.placeholder {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+
+/* Hide default input */
+input[type="file"] {
+    display: none;
+}
+
+.upload-box {
+    border: 2px dashed #3b82f6;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    background: #0f172a;
+    transition: 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.upload-box:hover {
+    background: #1e293b;
+    border-color: #60a5fa;
+}
+
+.upload-content {
+    color: #cbd5e1;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin: 0;
+}
+
+#fileName {
+    display: block;
+    margin-top: 10px;
+    color: #60a5fa;
+    font-size: 14px;
+}

@@ -1,27 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Urban Vulnerability Mapping</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>Urban Vulnerability AI Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<h1>AI-Based Urban Vulnerability Mapping</h1>
+<div class="dashboard">
 
-<form method="POST" enctype="multipart/form-data">
-    <input type="file" name="image" required>
-    <button type="submit">Analyze</button>
-</form>
+    <div class="header">
+        <h1>Urban Vulnerability Mapping System</h1>
+        <p>AI-Based Patch-Level Risk Classification using Satellite Imagery</p>
+    </div>
 
-{% if uploaded_image %}
-    <h2>Uploaded Image</h2>
-    <img src="{{ uploaded_image }}" width="400">
-{% endif %}
+    <div class="content">
 
-{% if result_image %}
-    <h2>Vulnerability Map</h2>
-    <img src="{{ result_image }}" width="400">
-{% endif %}
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <form method="POST" enctype="multipart/form-data">
+                <h3>Upload Satellite Image</h3>
+                <div class="upload-box" id="uploadBox">
+    <input type="file" name="image" id="fileInput" required>
+    <div class="upload-content">
+        <p class="upload-icon">⬆</p>
+        <p>Click or Drag Satellite Image Here</p>
+        <span id="fileName">No file selected</span>
+    </div>
+</div>
 
+<button type="submit">Run Analysis</button>
+            </form>
+
+            <div class="legend">
+                <h3>Risk Levels</h3>
+                <div><span class="low"></span> Low Risk</div>
+                <div><span class="medium"></span> Medium Risk</div>
+                <div><span class="high"></span> High Risk</div>
+            </div>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <div class="placeholder">
+    {% if not uploaded_image %}
+        <h2>Awaiting Image Upload</h2>
+        <p>Upload a satellite image to begin vulnerability analysis.</p>
+    {% endif %}
+</div>
+
+            {% if uploaded_image %}
+            <div class="image-row">
+                <div class="image-card">
+                    <h3>Original Image</h3>
+                    <img src="{{ uploaded_image }}">
+                </div>
+
+                <div class="image-card">
+                    <h3>Vulnerability Map</h3>
+                    <img src="{{ result_image }}">
+                </div>
+            </div>
+            {% endif %}
+
+            {% if stats %}
+            <div class="stats-card">
+                <h3>Risk Distribution</h3>
+                <div class="stats">
+                    <div class="stat-box low-bg">
+                        <h2>{{ stats.low }}%</h2>
+                        <p>Low Risk</p>
+                    </div>
+                    <div class="stat-box medium-bg">
+                        <h2>{{ stats.medium }}%</h2>
+                        <p>Medium Risk</p>
+                    </div>
+                    <div class="stat-box high-bg">
+                        <h2>{{ stats.high }}%</h2>
+                        <p>High Risk</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
