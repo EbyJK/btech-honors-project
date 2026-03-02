@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Urban Vulnerability Mapping</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>AI-Based Urban Vulnerability Mapping</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <button type="submit">Analyze</button>
+</form>
+
+{% if uploaded_image %}
+    <h2>Uploaded Image</h2>
+    <img src="{{ uploaded_image }}" width="400">
+{% endif %}
+
+{% if result_image %}
+    <h2>Vulnerability Map</h2>
+    <img src="{{ result_image }}" width="400">
+{% endif %}
+
+</body>
+</html>
